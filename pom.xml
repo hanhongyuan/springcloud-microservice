@@ -111,12 +111,12 @@
 	</dependencyManagement>
 
 	<modules>
-		<module>../book-service</module>
-		<module>../cloud-admin-server</module>
-		<module>../springcloud-eureka-server</module>
-		<module>../springcloud-gateway</module>
-		<module>../springcloud-hystix-turbine</module>
-		<module>../user-service-feign</module>
-		<module>../user-service-ribbon</module>
+		<module>book-service</module>
+		<module>cloud-admin-server</module>
+		<module>springcloud-eureka-server</module>
+		<module>springcloud-gateway</module>
+		<module>springcloud-hystix-turbine</module>
+		<module>user-service-feign</module>
+		<module>user-service-ribbon</module>
 	</modules>
 </project>
