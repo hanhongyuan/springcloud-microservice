@@ -1,0 +1,55 @@
+info:
+  component: Zuul Server
+
+#服务端口
+server:
+  port: 8080
+
+#路由规则
+zuul:
+  routes:
+    book: 
+      path: /books/**
+      service-id: book-service
+      url: http://localhost:3333
+    user:
+      path: /users/**
+      service-id: user-service
+      url: http://localhost:2222
+
+endpoints: 
+  refresh:
+    enabled: true
+  restart:
+    enabled: true
+  shutdown: 
+    enabled: true #启用shutdown
+    sensitive: false #禁用密码验证 
+  health:
+    sensitive: false 
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+ribbon:
+  ReadTimeout: 60000  #ribbon的TimeOut时间设置到60秒
+  ConnectTimeout: 6000
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+ 
+#注册中心地址
+eureka: 
+   instance:
+      prefer-ip-address: true
+   client: 
+      register-with-eureka: true #是否注册自身到eureka服务器
+      fetch-registry: true #是否从eureka服务器获取注册信息
+      serviceUrl: 
+        defaultZone: http://localhost:8761/eureka/

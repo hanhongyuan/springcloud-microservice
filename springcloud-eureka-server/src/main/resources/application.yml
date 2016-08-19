@@ -1,0 +1,30 @@
+#服务端口
+server:
+  port: 8761
+ 
+endpoints: 
+  refresh:
+    enabled: true
+  restart:
+    enabled: true
+  shutdown: 
+    enabled: true #启用shutdown
+    sensitive: false #禁用密码验证 
+  health:
+    sensitive: false
+    
+#eureka的配置
+eureka:
+  instance:
+    lease-renewal-interval-in-seconds: 3 #缩短注册时间
+    lease-expiration-duration-in-seconds: 5 #缩短过期时间
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true #是否注册自身到eureka服务器
+    fetch-registry: true #是否从eureka服务器获取注册信息
+    serviceUrl: 
+      defaultZone: http://localhost:8761/eureka/ #指定注册端口以及路径
+  server:
+    enable-self-preservation: false #及时删除无效服务
+    wait-time-in-ms-when-sync-empty: 0 #当同步为空时的等待时间 
+

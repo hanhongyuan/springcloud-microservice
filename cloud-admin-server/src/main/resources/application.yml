@@ -1,0 +1,25 @@
+#服务端口
+server:
+  port: 8050
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown: 
+    enabled: true #启用shutdown,幽雅停机
+    sensitive: false #禁用密码验证
+  health:
+    sensitive: false
+
+#eureka的配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5 #心跳间隔
+  client:
+    register-with-eureka: true #是否注册自身到eureka服务器
+    fetch-registry: true #是否从eureka服务器获取注册信息
+    serviceUrl: 
+      defaultZone: http://172.16.11.55:8761/eureka/
+      #设置eureka服务器所在的地址，注册服务需要依赖这个地址
+

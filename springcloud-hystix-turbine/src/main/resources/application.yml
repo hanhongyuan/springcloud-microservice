@@ -1,0 +1,43 @@
+info:
+  component: Hystrix Dashboard
+
+#服务端口
+server:
+  port: 8989
+
+endpoints: 
+  refresh:
+    enabled: true
+  restart:
+    enabled: true
+  shutdown: 
+    enabled: true #启用shutdown
+    sensitive: false #禁用密码验证 
+  health:
+    sensitive: false
+
+#配置需要聚合的应用，这里对应了业务服务的spring.application.name
+turbine:
+  appConfig: BOOK-SERVICE,USER-SERVICE   #turbine监控的服务，可以有多个
+  aggregator: 
+    clusterConfig: book-service,user-service #turbine监控的服务，可以有多个#turbine需要聚合的集群名称通过 http://localhost:8989/turbine.stream?cluster=MAIN访问 
+  cluster-name-expression: metadata['cluster']
+  #获取集群名表达式，这里表示获取元数据中的cluster数据，在node01,node02为配置对应信息,去看node01,node02的配置文件，一看便知
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+#eureka的配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 3  #心跳间隔
+  client:
+    register-with-eureka: true #注册自身到eureka服务器
+    fetch-registry: true #从eureka服务器获取注册信息
+    serviceUrl: 
+      defaultZone: http://localhost:8761/eureka/ 
+#设置eureka服务器所在的地址，注册服务需要依赖这个地址
+

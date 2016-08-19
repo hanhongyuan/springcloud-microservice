@@ -1,0 +1,29 @@
+#服务端口
+server:
+  port: 2222
+ 
+endpoints: 
+  refresh:
+    enabled: true
+  restart:
+    enabled: true
+  shutdown: 
+    enabled: true #启用shutdown
+    sensitive: false #禁用密码验证 
+  health:
+    sensitive: false
+
+    
+#eureka的配置
+eureka:
+  instance:
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 10
+    metadata-map:
+      cluster: user-service
+  client:
+    register-with-eureka: true #是否注册自身到eureka服务器
+    fetch-registry: true #是否从eureka服务器获取注册信息
+    serviceUrl: 
+      defaultZone: http://localhost:8761/eureka/ #设置eureka服务器所在的地址，注册服务需要依赖这个地址
+    registry-fetch-interval-seconds: 5
